@@ -13,17 +13,30 @@ public class OnAwake : MonoBehaviour
         get => delay;
         set => delay = Mathf.Max(0, value);
     }
+    [SerializeField] private bool recallOnEnable = false;
 
-    [SerializeField, Space(15)] private UnityEvent invokeOnAwake;
+    [SerializeField, Space(10)] private UnityEvent invokeOnAwake;
     public event Action OnAwakeActions;
+
+    [Header("After Execution")]
+    [SerializeField] private bool disableGameObject = false;
+    [SerializeField] private bool disableComponent = false;
+
     private Coroutine invokedCoroutine;
 
     private void Awake()
     {
+        if (enabled == false) return;
         ExecuteAwake();
     }
 
-    // Api for runtime usage
+    private void OnEnable()
+    {
+        if (recallOnEnable)
+            RecallAwakeFunction(DelayInCall);
+    }
+
+    // API for runtime usage
     public void RecallAwakeFunction(float delayInSeconds = 0)
     {
         DelayInCall = delayInSeconds;
@@ -49,6 +62,9 @@ public class OnAwake : MonoBehaviour
         }
 
         invokedCoroutine = null;
+
+        gameObject.SetActive(!disableGameObject);
+        enabled = !disableComponent;
     }
 
     private void StopInvokedCoroutine()
@@ -66,3 +82,4 @@ public class OnAwake : MonoBehaviour
     private void OnDestroy() => StopInvokedCoroutine();
 
 }
+
