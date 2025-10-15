@@ -1,4 +1,4 @@
-# ⚠️ IMPORTANT NOTICE
+# IMPORTANT NOTICE
 
 These event trigger scripts **require the BaseInvokeEvent class** to work properly.
 Before using any of the provided subclasses make sure you have **imported or downloaded the `BaseInvokeEvent.cs`** file into your Unity project.
