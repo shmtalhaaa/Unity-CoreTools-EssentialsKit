@@ -23,8 +23,14 @@ public abstract class DelayedBaseInvokeEvent : SimpleBaseInvokeEvent
     #endregion
 
     // Public API to invoke the UnityEvent and Action after a custom updateDelay at runtime.
-    public void RecallFunction(float delayInSeconds = 0)
+    public void RecallFunction(float delayInSeconds)
     {
+        if (!isActiveAndEnabled)
+        {
+            Debug.LogError("Component is inactive/disabled");
+            return;
+        }
+
         DelayInCall = delayInSeconds;
         if (invokedCoroutine != null)
             StopInvokedCoroutine();
