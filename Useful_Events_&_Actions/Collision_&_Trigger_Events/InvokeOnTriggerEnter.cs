@@ -9,6 +9,6 @@ public class InvokeOnTriggerEnter : DelayedBaseInvokeEvent
     {
         for (int i = 0; i < tagNames.Length; i++)
             if (other.CompareTag(tagNames[i]))
-                RecallFunction();
+                RecallFunction(DelayInCall);
     }
 }

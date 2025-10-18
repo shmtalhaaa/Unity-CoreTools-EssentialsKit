@@ -9,6 +9,6 @@ public class InvokeOnCollisionEnter : DelayedBaseInvokeEvent
     {
         for (int i = 0; i < tagNames.Length; i++)
             if (collision.gameObject.CompareTag(tagNames[i]))
-                RecallFunction();
+                RecallFunction(DelayInCall);
     }
 }
